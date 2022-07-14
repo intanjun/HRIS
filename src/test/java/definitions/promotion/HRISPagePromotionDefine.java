@@ -21,8 +21,10 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.Reporter;
 
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -242,8 +244,6 @@ public class HRISPagePromotionDefine {
 	public void input_Tunjangan_Transportasi(String transportasi) {
 		prom.setTunTransportasi(transportasi);
 		System.out.println("User memasukkan tunjangan transportasi Rp " + transportasi);
-//		JavascriptExecutor js = (JavascriptExecutor) driver;
-//		js.executeScript("window.scrollBy(0,3000)");
 	}
 
 //	PERPANJANG KONTRAK===================================================================================================================================================
@@ -262,7 +262,7 @@ public class HRISPagePromotionDefine {
 	@And("^User memilih masa (.*)$")
 	public void input_Masa_Contract(String masa) {
 		prom.setMasa(masa);
-		prom.sleep(800);
+		prom.sleep(500);
 	}
 
 	@And("^User memilih tanggal mulai (.*), tanggal selesai (.*), masa (.*)$")
@@ -281,25 +281,25 @@ public class HRISPagePromotionDefine {
 	@And("^User mengisi penilaian (.*),(.*),(.*),(.*),(.*),(.*),(.*),(.*),(.*),(.*)$")
 	public void select_Value(String opt01, String opt02, String opt03, String opt04, String opt05, String opt06,
 			String opt07, String opt08, String opt09, String opt10) {
-		prom.sleep(300);
+		prom.sleep(150);
 		prom.setAnswer01(opt01);
-		prom.sleep(300);
+		prom.sleep(150);
 		prom.setAnswer02(opt02);
-		prom.sleep(300);
+		prom.sleep(150);
 		prom.setAnswer03(opt03);
-		prom.sleep(300);
+		prom.sleep(150);
 		prom.setAnswer04(opt04);
-		prom.sleep(300);
+		prom.sleep(150);
 		prom.setAnswer05(opt05);
-		prom.sleep(300);
+		prom.sleep(150);
 		prom.setAnswer06(opt06);
-		prom.sleep(300);
+		prom.sleep(150);
 		prom.setAnswer07(opt07);
-		prom.sleep(300);
+		prom.sleep(150);
 		prom.setAnswer08(opt08);
-		prom.sleep(300);
+		prom.sleep(150);
 		prom.setAnswer09(opt09);
-		prom.sleep(300);
+		prom.sleep(150);
 		prom.setAnswer10(opt10);
 		System.out.println("User memilih jawaban");
 	}
@@ -327,6 +327,7 @@ public class HRISPagePromotionDefine {
 		prom.chooseUlasan(ulasanAtsn);
 		System.out.println("Ulasan Atasan terisi " + ulasanAtsn);
 	}
+	
 
 //	JENIS VAKSIN=========================================================================================================================================================
 	@And("^User mengisi jenis vaksin(.*)$")
@@ -348,7 +349,7 @@ public class HRISPagePromotionDefine {
 	@And("User klik tombol sent to uplier")
 	public void click_Btn_SentToUplier() {
 		prom.btnSend.click();
-		prom.sleep(800);
+		prom.sleep(500);
 	}
 
 	@Then("Data tersimpan")
@@ -373,15 +374,11 @@ public class HRISPagePromotionDefine {
 //	} 
 	@And("^User memilih from date (.*)")
 	public void choose_from(String start) {
-//		WebElement endDate = driver.findElement(By.xpath("//div[@id='datepicker-autoClose']//i[@class='fa fa-calendar']"));
-//		((JavascriptExecutor) driver).executeScript("arguments[0].removeAttribute('readonly','readonly')", endDate);
 		promotionHis.calStart.click();
-//		prom.setDate(start);
 		((JavascriptExecutor) driver).executeScript("document.getElementById('tgl').removeAttribute('readonly',0);"); // Enables
 		WebElement fromDateBox = driver.findElement(By.id("tgl"));
 		fromDateBox.clear();
 		fromDateBox.sendKeys(start);
-//		fromDateBox.sendKeys("2022-07-08"); //Enter date in required format
 	}
 
 	@And("^User memilih to date (.*)")
@@ -390,25 +387,19 @@ public class HRISPagePromotionDefine {
 		((JavascriptExecutor) driver).executeScript("document.getElementById('tgl2').removeAttribute('readonly',0);"); // Enables
 		WebElement fromDateBox = driver.findElement(By.id("tgl2"));
 		fromDateBox.clear();
-//		fromDateBox.sendKeys("2022-07-08"); //Enter date in required format
 		fromDateBox.sendKeys(to);
 		fromDateBox.click();
 		promotionHis.filter.click();
-//		prom.setDate(to);
 	}
 
 	@And("User menekan klik next")
 	public void click_next() {
-//		JavascriptExecutor js = (JavascriptExecutor) driver;
-//		js.executeScript("window.scrollBy(0,2500)");
 		prom.scrollToElem(promotionHis.next);
 		promotionHis.next.click();
 	}
 
 	@And("User menekan klik prev")
 	public void click_prev() {
-//		JavascriptExecutor js = (JavascriptExecutor) driver;
-//		js.executeScript("window.scrollBy(0,2500)");
 		prom.scrollToElem(promotionHis.next);
 		promotionHis.prev.click();
 	}
@@ -428,8 +419,6 @@ public class HRISPagePromotionDefine {
 	public void show_Of_Data(String show) {
 		Select showdata = new Select(promotionHis.show);
 		showdata.selectByVisibleText(show);
-//		JavascriptExecutor js = (JavascriptExecutor) driver;
-//		js.executeScript("window.scrollBy(0,1000)");
 	}
 
 	@And("User sort by Ascending ID Request")
@@ -516,7 +505,6 @@ public class HRISPagePromotionDefine {
 
 	@And("User menekan button kembali")
 	public void click_Button_Kembali() {
-		promotionHis.btnSee.click();
 		promotionHis.btnBack.click();
 	}
 
@@ -563,6 +551,14 @@ public class HRISPagePromotionDefine {
 	}
 
 //	ASSERTION============================================================================================================================================================
+	@Then("Validasi search by ID Req")
+	public void search_byIDReq() {
+		String actual = promotionHis.getEmptyTableSearch();
+		System.out.println(actual);
+		String expected = "Harusnya Tampil data search By ID Request";
+		Assert.assertEquals(actual, expected);
+	}
+	
 	@Then("User berada pada Page Promotion")
 	public void halaman_Promotion() {
 		driver.get("https://dev.ptdika.com/employee/promotion/promotion/");
@@ -610,40 +606,6 @@ public class HRISPagePromotionDefine {
 		}
 		Assert.assertTrue(check);
 	}
-
-	// @Then("^Validasi search by (.*)$")
-	public void search_Validation(String value) {
-		String id = promotionHis.getIDReq();
-		String form = promotionHis.getForm();
-//		form = form.replace("FM-HRD-600-", "").trim();
-		String nama = promotionHis.getNama();
-		String tgl = promotionHis.getTgl();
-		String appr = promotionHis.getAppr();
-//		appr = appr.replace("Send Data To Upliner", "").trim();
-		String kategori = promotionHis.getKategori();
-//		kategori = kategori.replace("promotion", "");
-		String req = promotionHis.getReq();
-		System.out.println("Yang dicari : " + value);
-		boolean check = false;
-		if (value.contains("326")) {
-			check = true;
-		} else if (value.contains("600")) {
-			check = true;
-		} else if (value.contains("zaki")) {
-			check = true;
-		} else if (value.contains("2022-07")) {
-			check = true;
-		} else if (value.contains("cecep")) {
-			check = true;
-		} else if (value.contains("salary")) {
-			check = true;
-		} else if (value.contains("tamimi")) {
-			check = true;
-		} else if (value.isEmpty()) {
-			check = true;
-		}
-		Assert.assertTrue(check);
-	} // blm berjalan sesuai karena hanya bisa search full data
 
 	@Then("^Validasi search by (.*) contain (.*)")
 	public void searchBy_Validation(String searchBy, String word) {
@@ -705,12 +667,18 @@ public class HRISPagePromotionDefine {
 		System.out.println("Validasi data akan diteruskan ke uplier");
 		prom.getSentUplier();
 	}
-
-	@And("Validasi field nik kosong")
-	public void field_Data_nik_kosong() {
-		System.out.println("Validasi data nik kosong");
-		prom.getErrorNIK();
+	
+	@And("Validasi tgl > hari ini")
+	public void validasi_lebih_dari_hari_ini() {
+		System.out.println("Data > dari hari ini");
+		prom.getVaksinOver();
 	}
+
+//	@And("Validasi field nik kosong")
+//	public void field_Data_nik_kosong() {
+//		System.out.println("Validasi data nik kosong");
+//		prom.getErrorNIK();
+//	}
 
 	@And("Validasi field tglEf kosong")
 	public void field_Data_TGlEf_kosong() {
@@ -763,6 +731,15 @@ public class HRISPagePromotionDefine {
 			System.out.println("Please fil out this field!");
 		} else {
 			System.out.println("Note terisi");
+		}
+	}
+	
+	@And("Validasi field nik kosong")
+	public void field_nik_kosong() {
+		if (prom.NIKnull() == true) {
+			System.out.println("Please select an item in the list!");
+		} else {
+			System.out.println("Nik terisi");
 		}
 	}
 
@@ -825,14 +802,14 @@ public class HRISPagePromotionDefine {
 		WebElement checkBox3 = driver.findElement(By.cssSelector("#cb_promotion_2"));
 
 		if (checkBox1.isSelected() && checkBox2.isSelected()) {
-			check = true;	//false untuk menandakan dia tidak boleh 2
+			check = false;	//false untuk menandakan dia tidak boleh 2
 			  
 			System.out.println("Tidak boleh pilih 2 tujuan promosi");
 		} else if (checkBox1.isSelected() && checkBox3.isSelected()) {
-			check = true;
+			check = false;
 			System.out.println("Tidak boleh pilih 2 tujuan promosi");
 		} else if (checkBox1.isSelected() && checkBox3.isSelected()) {
-			check = true;
+			check = false;
 			System.out.println("Tidak boleh pilih 2 tujuan promosi");
 		}
 		Assert.assertTrue(check);
@@ -857,7 +834,7 @@ public class HRISPagePromotionDefine {
 	public void validasi_asc_kolom_id() {
 		String actual = promotionHis.getIDReq();
 		System.out.println(actual);
-		String expected = "410";
+		String expected = "540";
 		Assert.assertEquals(actual, expected);
 	}
 
@@ -865,7 +842,7 @@ public class HRISPagePromotionDefine {
 	public void validasi_asc_kolom_form() {
 		String actual = promotionHis.getForm();
 		System.out.println(actual);
-		String expected = "FM-HRD-600-387-00";
+		String expected = "FM-HRD-600-517-00";
 		Assert.assertEquals(actual, expected);
 	}
 
@@ -881,7 +858,7 @@ public class HRISPagePromotionDefine {
 	public void validasi_kolom_tgl() {
 		String actual = promotionHis.getTgl();
 		System.out.println(actual);
-		String expected = "2022-07-12 10:29:49";
+		String expected = "2022-07-14 08:36:34";
 		Assert.assertEquals(actual, expected);
 	}
 
@@ -897,7 +874,7 @@ public class HRISPagePromotionDefine {
 	public void validasi_asc_kolom_kategori() {
 		String actual = promotionHis.getKategori();
 		System.out.println(actual);
-		String expected = "promotion salary";
+		String expected = "promotion level";
 		Assert.assertEquals(actual, expected);
 	}
 
@@ -938,18 +915,21 @@ public class HRISPagePromotionDefine {
 	public void validasi_desc_kolom_kategori() {
 		String actual = promotionHis.getKategori();
 		System.out.println(actual);
-		String expected = "promotion salary";
+		String expected = "promotion level";
 		Assert.assertEquals(actual, expected);
 	}
 
 //	=====================================================================================================================================================================
 	@After
-	public void close() {
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void close(Scenario scenario) {
+		prom.sleep(3000);
+		System.out.println(scenario.getStatus());
+//		scenario.log(scenario.getName());
+		if (scenario.isFailed() || scenario.getStatus().equals("UNDEFINED")||scenario.getStatus().equals("FAILED")) {
+			System.out.println("screenshot isFailed");
+			String file = "<img src='file://" + prom.screenshoot(driver)
+					+ "'height=\"350\" width=\"792\"/>";
+			Reporter.log(file);
 		}
 		driver.close();
 	}

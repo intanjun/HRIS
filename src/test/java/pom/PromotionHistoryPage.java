@@ -60,9 +60,9 @@ public class PromotionHistoryPage extends Utilities {
 	@FindBy(xpath = "//th[@aria-label='Form: activate to sort column descending']")
 	public WebElement descForm;
 //	error
-	@FindBy(xpath = "//th[@aria-label='Nama Karyawan: activate to sort column descending']")
-	public WebElement ascName;
 	@FindBy(xpath = "//th[@aria-label='Nama Karyawan: activate to sort column ascending']")
+	public WebElement ascName;
+	@FindBy(xpath = "//th[@aria-label='Nama Karyawan: activate to sort column descending']")
 	public WebElement descName;
 	
 	
@@ -119,7 +119,9 @@ public class PromotionHistoryPage extends Utilities {
 		System.out.println(driver.findElement(By.xpath("//*[@id=\"table\"]/tbody/tr/td[8]")).getText());
 		return driver.findElement(By.xpath("//*[@id=\"table\"]/tbody/tr[1]/td[8]")).getText();
 	}
-	
+	public String getEmptyTableSearch() {
+		return driver.findElement(By.xpath("//td[@class='dataTables_empty']")).getText();
+	}
 //	=====================================================================================================================================================================
 	
 }

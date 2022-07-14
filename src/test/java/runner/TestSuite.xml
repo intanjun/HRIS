@@ -4,8 +4,7 @@
 	<test name="HRIS Employee">
 
 		<classes>
-			<class name="runner.HRISPagePromotionRunner"></class>
-			<class name="runner.HRISPagePromotionHistoryRunner"></class>
+			<class name="runner.promotion_history.HRISPromotionHistoryRunner"></class>
 		</classes>
 
 	</test>

@@ -1,7 +1,53 @@
 #Author: intanjuniar101@gmail.com
 Feature: Add Pengajuan Promotion
 
-  @coba
+  Scenario Outline: Action click *AddData*
+    Given User login sebagai Manager
+    When User masuk pada Homepage
+    And User menekan teks promotion pada Navigation Menu
+    And User menekan Promotion pada submenu Navigation
+    Then User add
+
+  Scenario Outline: Tampil pesan sukses jika data berhasil ditambahkan
+    Given User login sebagai Manager
+    When User masuk pada Homepage
+    And User menekan teks promotion pada Navigation Menu
+    And User menekan Promotion pada submenu Navigation
+    And User add
+    And User memilih tujuan promosi perubahan kontrak
+    And User memilih nik <nik>
+    And User memilih tanggal mulai <start>, tanggal selesai <end>, masa <masa>
+    And User mengisi jenis vaksin <vaksin>
+    And User mengisi tanggal vaksin <tgl>
+    And User mengisi note <note>
+    And User klik tombol sent to uplier
+    Then Data tersimpan
+    And Validasi data tersimpan
+
+    Examples: 
+      | nik                              | start      | end        | masa | vaksin   | tgl        | note                          |
+      | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-14 | 2023-07-15 |   0  | Vaksin 2 | 2022-07-17 | Perbarui sertifikasi keahlian |
+
+  Scenario Outline: Tampil sent to uplier
+    Given User login sebagai Manager
+    When User masuk pada Homepage
+    And User menekan teks promotion pada Navigation Menu
+    And User menekan Promotion pada submenu Navigation
+    And User add
+    And User memilih tujuan promosi perubahan kontrak
+    And User memilih nik <nik>
+    And User memilih tanggal mulai <start>, tanggal selesai <end>, masa <masa>
+    And User mengisi jenis vaksin <vaksin>
+    And User mengisi tanggal vaksin <tgl>
+    And User mengisi note <note>
+    And User klik tombol sent to uplier
+    Then Data tersimpan
+    And Validasi kolom Appr
+
+    Examples: 
+      | nik                              | start      | end        | masa | vaksin   | tgl        | note                          |
+      | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | 2023-07-15 |   12 | Vaksin 2 | 2022-07-17 | Perbarui sertifikasi keahlian |
+
   Scenario Outline: Add data Perubahan kontrak dengan *field_start* and *field_end* >=current
     Given User login sebagai Manager
     When User masuk pada Homepage
@@ -70,7 +116,7 @@ Feature: Add Pengajuan Promotion
       | nik                              | start      | end        | masa | vaksin   | tgl        | note                    |
       | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | 2022-07-10 |    0 | Vaksin 2 | 2022-02-12 | Perbarui berkas kontrak |
 
-@vaksin
+  @vaksin
   Scenario Outline: Add data Perubahan kontrak dengan *field_vaksin* >=< current
     Given User login sebagai Manager
     When User masuk pada Homepage
@@ -93,7 +139,7 @@ Feature: Add Pengajuan Promotion
       | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-12 | 2023-07-12 |   12 | Vaksin 1 | 2022-07-10 | Perbarui berkas kontrak       |
       | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | 2022-09-15 |    2 | Vaksin 2 | 2022-04-15 | Perbarui sertifikasi keahlian |
 
-  Scenario Outline: Add data Perubahan kontrak dengan *masa* edit > auto sum
+  Scenario Outline: Add data Perubahan kontrak dengan *masa* edit > < auto sum
     Given User login sebagai Manager
     When User masuk pada Homepage
     And User menekan teks promotion pada Navigation Menu
@@ -260,7 +306,7 @@ Feature: Add Pengajuan Promotion
       | nik                              | start      | end        | masa | vaksin   | tgl        | note                    |
       | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-01 | 2023-04-01 |      | Vaksin 2 | 2022-02-12 | Perbarui berkas kontrak |
 
-	@showAutoSum
+  @showAutoSum
   Scenario Outline: Add data Perubahan kontrak dengan *field_masa* show auto sum, masa =0 & < 0
     Given User login sebagai Manager
     When User masuk pada Homepage

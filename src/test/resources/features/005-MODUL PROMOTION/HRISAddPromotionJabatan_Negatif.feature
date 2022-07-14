@@ -176,6 +176,28 @@ Feature: Add Pengajuan Promotion Jabatan
       | nik                              | tglEf      | status | unit         | jabatan | divisi      | level | opt01 | opt02 | opt03 | opt04 | opt05 | opt06 | opt07 | opt08 | opt09 | opt10 | kelebihan | grow  | asuransi | ulasan               | vaksin   | tgl        | note  |
       | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | PKWT   | Angkasa Pura | ASM     | Operational |       |     6 |     4 |     7 |     5 |     4 |     3 |     4 |     4 |     4 |     4 | Disiplin  | Fokus | BPJS K   | Lulus Masa Percobaan | Vaksin 2 | 2022-01-12 | sdasf |
 
+Scenario Outline: Add data Perubahan salary *variasiData_Gapok*
+    Given User login sebagai Manager
+    When User masuk pada Homepage
+    And User menekan teks promotion pada Navigation Menu
+    And User menekan Promotion pada submenu Navigation
+    And User add
+    And User memilih tujuan promosi perubahan salary
+    And User memilih nik <nik>
+    And User mengisi gapok <gapok>, jabatan <jabatan>, komunikasi <komunikasi>, transportasi <transportasi>
+    And User mengisi jenis vaksin <vaksin>
+    And User mengisi tanggal vaksin <tgl>
+    And User mengisi note <note>
+    And User klik tombol sent to uplier
+    Then Data tersimpan
+    And Validasi field gapok kosong
+
+    Examples: 
+      | nik                              | gapok   | jabatan | komunikasi | transportasi | vaksin   | tgl        | note          |
+      | EXD8200015 - EX - ADHITYA BAYU W |         | 1000000 |     200000 |       200000 | Vaksin 1 | 2022-02-21 | Segera vaksin |
+      | EXD8200015 - EX - ADHITYA BAYU W | haha    | 1000000 |     200000 |       200000 | Vaksin 1 | 2022-02-21 | Segera vaksin |
+      | EXD8200015 - EX - ADHITYA BAYU W | (^-.-^) | 1000000 |     200000 |       200000 | Vaksin 1 | 2022-02-21 | Segera vaksin |
+
   @tag2
   Scenario Outline: Add data Promosi jabatan dengan *field_vaksin* Kosong
     Given User login sebagai Manager
@@ -235,7 +257,6 @@ Feature: Add Pengajuan Promotion Jabatan
     And User memilih tujuan promosi perubahan jabatan
     And User memilih nik <nik>
     And User memilih tglEf <tglEf>, status <status>, unit <unit>, perubahan jabatan <jabatan>, divisi <divisi>, level <level>
-    And User mengisi penilaian <opt01>,<opt02>,<opt03>,<opt04>,<opt05>,<opt06>,<opt07>,<opt08>,<opt09>,<opt10>
     And User mengisi aspek Kelebihan <kelebihan>
     And User mengisi aspek yang perlu ditingkat <grow>
     And User mengisi asuransi <asuransi>
@@ -248,19 +269,19 @@ Feature: Add Pengajuan Promotion Jabatan
     And Validasi data tersimpan
 
     Examples: 
-      | nik                              | tglEf      | status | unit         | jabatan | divisi      | level | opt01 | opt02 | opt03 | opt04 | opt05 | opt06 | opt07 | opt08 | opt09 | opt10 | kelebihan | grow  | asuransi | ulasan               | vaksin   | tgl        | note  |
-      | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | PKWT   | Angkasa Pura | ASM     | Operational | ASM   |       |     4 |     7 |     5 |     4 |     3 |     4 |     4 |     4 |     4 | Disiplin  | Fokus | BPJS K   | Lulus Masa Percobaan | Vaksin 2 | 2022-01-12 | sdasf |
-      | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | PKWT   | Angkasa Pura | ASM     | Operational | ASM   |     6 |       |     7 |     5 |     4 |     3 |     4 |     4 |     4 |     4 | Disiplin  | Fokus | BPJS K   | Lulus Masa Percobaan | Vaksin 2 | 2022-01-12 | sdasf |
-      | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | PKWT   | Angkasa Pura | ASM     | Operational | ASM   |     6 |     4 |       |     5 |     4 |     3 |     4 |     4 |     4 |     4 | Disiplin  | Fokus | BPJS K   | Lulus Masa Percobaan | Vaksin 2 | 2022-01-12 | sdasf |
-      | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | PKWT   | Angkasa Pura | ASM     | Operational | ASM   |     6 |     4 |     7 |       |     4 |     3 |     4 |     4 |     4 |     4 | Disiplin  | Fokus | BPJS K   | Lulus Masa Percobaan | Vaksin 2 | 2022-01-12 | sdasf |
-      | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | PKWT   | Angkasa Pura | ASM     | Operational | ASM   |     6 |     4 |     7 |     5 |       |     3 |     4 |     4 |     4 |     4 | Disiplin  | Fokus | BPJS K   | Lulus Masa Percobaan | Vaksin 2 | 2022-01-12 | sdasf |
-      | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | PKWT   | Angkasa Pura | ASM     | Operational | ASM   |     6 |     4 |     7 |     5 |     4 |       |     4 |     4 |     4 |     4 | Disiplin  | Fokus | BPJS K   | Lulus Masa Percobaan | Vaksin 2 | 2022-01-12 | sdasf |
-      | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | PKWT   | Angkasa Pura | ASM     | Operational | ASM   |     6 |     4 |     7 |     5 |     4 |     3 |       |     4 |     4 |     4 | Disiplin  | Fokus | BPJS K   | Lulus Masa Percobaan | Vaksin 2 | 2022-01-12 | sdasf |
-      | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | PKWT   | Angkasa Pura | ASM     | Operational | ASM   |     6 |     4 |     7 |     5 |     4 |     3 |     4 |       |     4 |     4 | Disiplin  | Fokus | BPJS K   | Lulus Masa Percobaan | Vaksin 2 | 2022-01-12 | sdasf |
-      | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | PKWT   | Angkasa Pura | ASM     | Operational | ASM   |     6 |     4 |     7 |     5 |     4 |     3 |     4 |     4 |       |     4 | Disiplin  | Fokus | BPJS K   | Lulus Masa Percobaan | Vaksin 2 | 2022-01-12 | sdasf |
-      | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | PKWT   | Angkasa Pura | ASM     | Operational | ASM   |     6 |     4 |     7 |     5 |     4 |     3 |     4 |     4 |     4 |       | Disiplin  | Fokus | BPJS K   | Lulus Masa Percobaan | Vaksin 2 | 2022-01-12 | sdasf |
+      | nik                              | tglEf      | status | unit         | jabatan | divisi      | level | kelebihan | grow  | asuransi | ulasan               | vaksin   | tgl        | note  |
+      | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | PKWT   | Angkasa Pura | ASM     | Operational | ASM   | Disiplin  | Fokus | BPJS K   | Lulus Masa Percobaan | Vaksin 2 | 2022-01-12 | sdasf |
+      | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | PKWT   | Angkasa Pura | ASM     | Operational | ASM   | Disiplin  | Fokus | BPJS K   | Lulus Masa Percobaan | Vaksin 2 | 2022-01-12 | sdasf |
+      | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | PKWT   | Angkasa Pura | ASM     | Operational | ASM   | Disiplin  | Fokus | BPJS K   | Lulus Masa Percobaan | Vaksin 2 | 2022-01-12 | sdasf |
+      | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | PKWT   | Angkasa Pura | ASM     | Operational | ASM   | Disiplin  | Fokus | BPJS K   | Lulus Masa Percobaan | Vaksin 2 | 2022-01-12 | sdasf |
+      | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | PKWT   | Angkasa Pura | ASM     | Operational | ASM   | Disiplin  | Fokus | BPJS K   | Lulus Masa Percobaan | Vaksin 2 | 2022-01-12 | sdasf |
+      | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | PKWT   | Angkasa Pura | ASM     | Operational | ASM   | Disiplin  | Fokus | BPJS K   | Lulus Masa Percobaan | Vaksin 2 | 2022-01-12 | sdasf |
+      | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | PKWT   | Angkasa Pura | ASM     | Operational | ASM   | Disiplin  | Fokus | BPJS K   | Lulus Masa Percobaan | Vaksin 2 | 2022-01-12 | sdasf |
+      | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | PKWT   | Angkasa Pura | ASM     | Operational | ASM   | Disiplin  | Fokus | BPJS K   | Lulus Masa Percobaan | Vaksin 2 | 2022-01-12 | sdasf |
+      | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | PKWT   | Angkasa Pura | ASM     | Operational | ASM   | Disiplin  | Fokus | BPJS K   | Lulus Masa Percobaan | Vaksin 2 | 2022-01-12 | sdasf |
+      | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | PKWT   | Angkasa Pura | ASM     | Operational | ASM   | Disiplin  | Fokus | BPJS K   | Lulus Masa Percobaan | Vaksin 2 | 2022-01-12 | sdasf |
 
-  Scenario Outline: Add data Promosi jabatan dengan *fiel_aspek* variasi data
+  Scenario Outline: Add data Promosi jabatan dengan *field_aspek* variasi data
     Given User login sebagai Manager
     When User masuk pada Homepage
     And User menekan teks promotion pada Navigation Menu
@@ -293,7 +314,7 @@ Feature: Add Pengajuan Promotion Jabatan
       | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | PKWT   | Angkasa Pura | ASM     | Operational | ASM   |     6 |     4 |     7 |     5 |     4 |     3 |     4 |     4 |     4 |     4 | Disiplin  | Fokus   | (^-,-^)  | Lulus Masa Percobaan | Vaksin 2 | 2022-01-12 | sdasf |
       | EXD8200015 - EX - ADHITYA BAYU W | 2022-07-15 | PKWT   | Angkasa Pura | ASM     | Operational | ASM   |     6 |     4 |     7 |     5 |     4 |     3 |     4 |     4 |     4 |     4 | Disiplin  | Fokus   |          | Lulus Masa Percobaan | Vaksin 2 | 2022-01-12 | sdasf |
 
-@cek1
+  @cek1
   Scenario Outline: Checklist tujuan promosi 2
     Given User login sebagai Manager
     When User masuk pada Homepage
@@ -315,7 +336,7 @@ Feature: Add Pengajuan Promotion Jabatan
     And User memilih tujuan promosi perubahan salary
     Then Validasi tujuan promosi 3
 
-	@Unchecklist
+  @Unchecklist
   Scenario Outline: Unchecklist tujuan promosi
     Given User login sebagai Manager
     When User masuk pada Homepage

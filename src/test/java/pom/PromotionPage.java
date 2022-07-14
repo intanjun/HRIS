@@ -62,6 +62,8 @@ public class PromotionPage extends Utilities {
 	public WebElement inVaksin;
 	@FindBy(xpath = "//input[@id='Vaksin_Date']")
 	public WebElement inTglVaksin;
+	@FindBy(xpath = "//td[@class='today day']")
+	public WebElement inVaksinToday;
 	@FindBy(xpath = "//textarea[@id='Requested_Comment']")
 	public WebElement inNote;
 
@@ -593,6 +595,7 @@ public class PromotionPage extends Utilities {
 		String actual = errorStart.getText();
 		Assert.assertEquals(actual, expected);
 	}
+	
 	public void getErrorEnd() {
 		sleep(300);
 		scrollToElem(masaJbtn);
@@ -632,9 +635,23 @@ public class PromotionPage extends Utilities {
 		}
 	}
 	
+	public boolean NIKnull() {
+		boolean check = false;
+		try {
+			String value = ((WebElement) inNik).getAttribute("required");
+			if (value != null) {
+				check = true;
+			}
+			return check;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return check = false;
+		}
+	}
+	
 //	 PERUBAHAN SALARY===============================================================================================
 	public void getErrorGapok() {
-		sleep(300);
+		sleep(200);
 		scrollToElem(inGaPok);
 		System.out.println(errorGapok.getText());
 		String expected = "Gaji Pokok Harap Di Isi!";
@@ -642,7 +659,7 @@ public class PromotionPage extends Utilities {
 		Assert.assertEquals(actual, expected);
 	}
 	public void getErrorTunJabatan() {
-		sleep(300);
+		sleep(200);
 		scrollToElem(inGaPok);
 		System.out.println(errorTunJabatan.getText());
 		String expected = "Tunjangan Jabatan Harap Di Isi!";
@@ -650,7 +667,7 @@ public class PromotionPage extends Utilities {
 		Assert.assertEquals(actual, expected);
 	}
 	public void getErrorTunKomunikasi() {
-		sleep(300);
+		sleep(200);
 		scrollToElem(inGaPok);
 		System.out.println(errorTunKomunikasi.getText());
 		String expected = "Tunjangan Komunikasi Harap Di Isi!";
@@ -658,11 +675,22 @@ public class PromotionPage extends Utilities {
 		Assert.assertEquals(actual, expected);
 	}
 	public void getErrorTunTransport() {
-		sleep(300);
+		sleep(200);
 		scrollToElem(inGaPok);
 		System.out.println(errorTunTransportasi.getText());
 		String expected = "Tunjangan Transportasi Harap Di Isi!";
 		String actual = errorTunTransportasi.getText();
 		Assert.assertEquals(actual, expected);
 	}
+	
+	public void getVaksinOver() {
+		sleep(200);
+		System.out.println(inTglVaksin.getText());
+		String expected = "2022-07-14";
+		String actual = errorTunTransportasi.getText();
+		Assert.assertEquals(actual, expected);
+	}
+	
+	
+
 }
